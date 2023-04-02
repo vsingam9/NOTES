@@ -81,8 +81,235 @@ Now if we run the git status command the working are will be clean. that means t
 
             C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT>
 
+            PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT> cat story1.txt
+               line1
+               line2
+  Now the story1.txt fiel updated with line2, if we think that updated accidentally and we would like to restore previous file , we can do that. 
+            PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT> git restore story1.txt
+            PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT> cat story1.txt
+            "line1"
+            PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT>git status
+                  On branch main
+                  Your branch is ahead of 'origin/main' by 1 commit.
+                    (use "git push" to publish your local commits)
+
+                  nothing to commit, working tree clean
+                  PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT>
+  Now the working is clean, let's assume we are knowingly updated a file, we will follow the same process stage, commit the file.
+  
+                  PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT> echo "line2" >>story1.txt
+                  PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT> cat story1.txt
+                  line1
+                  line2
+                  PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT> git status
+                  On branch main
+                  Your branch is ahead of 'origin/main' by 1 commit.
+                    (use "git push" to publish your local commits)
+
+                  Changes not staged for commit:
+                    (use "git add <file>..." to update what will be committed)
+                    (use "git restore <file>..." to discard changes in working directory)
+                          modified:   story1.txt
+
+                  no changes added to commit (use "git add" and/or "git commit -a")
+                  PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT> git add story1.txt
+                  PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT> git commit -m "Updated first story"
+                  [main 06c4068] Updated first story
+                   1 file changed, 0 insertions(+), 0 deletions(-)
+                  PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT> git status
+                  On branch main
+                  Your branch is ahead of 'origin/main' by 2 commits.
+                    (use "git push" to publish your local commits)
+
+                  nothing to commit, working tree clean
+                  PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT
+  below we have added line3 to story1.txt file and line1 to story2.txt file. 
+                  PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT> echo "line3" >>story1.txt
+                  PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT> echo "line1" > story2.txt
+                  PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT> git status
+                  On branch main
+                  Your branch is ahead of 'origin/main' by 2 commits.
+                    (use "git push" to publish your local commits)
+
+                  Changes not staged for commit:
+                    (use "git add <file>..." to update what will be committed)
+                    (use "git restore <file>..." to discard changes in working directory)
+                          modified:   story1.txt
+
+                  Untracked files:
+                    (use "git add <file>..." to include in what will be committed)
+                          story2.txt
+
+                  no changes added to commit (use "git add" and/or "git commit -a")
+                  PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT>
+
+if we want to commit them together we can do this. 
+                  PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT> git add .
+                  PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT> git status
+                  On branch main
+                  Your branch is ahead of 'origin/main' by 2 commits.
+                    (use "git push" to publish your local commits)
+
+                  Changes to be committed:
+                    (use "git restore --staged <file>..." to unstage)
+                          modified:   story1.txt
+                          new file:   story2.txt
+
+                  PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT> git commit -m "Added second story and updated first story"
+                  [main 6b8ba14] Added second story and updated first story
+                   2 files changed, 0 insertions(+), 0 deletions(-)
+                   create mode 100644 GIT/story2.txt
+                  PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT> git status
+                  On branch main
+                  Your branch is ahead of 'origin/main' by 3 commits.
+                    (use "git push" to publish your local commits)
+
+                  nothing to commit, working tree clean
+                  PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT>
+                  
+if we want to commit them individually we can follow this. 
+# git add story1.txt
+# git status ( story1.txt will be in staging area and story2.txt will be untracked state)
+# git commit -m "Updated first story"
+# git add stroy2.txt
+# git status ( story2.txt will be in staging area)
+# git commit -m "Added second story"
+Note: Make each commit attomic 
+
+               PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT> echo "line4" >>story1.txt
+               PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT> git add story1.txt
+               PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT> echo "djfjdfljlsd" >story1.txt
+               PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT> git status
+               On branch main
+               Your branch is ahead of 'origin/main' by 3 commits.
+                 (use "git push" to publish your local commits)
+
+               Changes to be committed:
+                 (use "git restore --staged <file>..." to unstage)
+                       modified:   story1.txt
+
+               Changes not staged for commit:
+                 (use "git add <file>..." to update what will be committed)
+                 (use "git restore <file>..." to discard changes in working directory)
+                       modified:   story1.txt
+
+               PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT>
+In this above example we have updaed file story1.txt with line4 and staged , and then accidentally overwriten the same file, when we check the git status it will show file status as modified and staged. 
+Here we can restore the staged file using below command 
+# git restore story1.txt 
+
+                  PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT> git restore story1.txt
+                  PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT> git status
+                  On branch main
+                  Your branch is ahead of 'origin/main' by 3 commits.
+                    (use "git push" to publish your local commits)
+
+                  Changes to be committed:
+                    (use "git restore --staged <file>..." to unstage)
+                          modified:   story1.txt
+
+                  PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT>
+                  PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT> cat story1.txt
+                  line1
+                  line2
+                  line3
+                  line4
+                  PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT>
+# example     
+                        PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT> git status
+                        On branch main
+                        Your branch is ahead of 'origin/main' by 3 commits.
+                          (use "git push" to publish your local commits)
+
+                        Changes to be committed:
+                          (use "git restore --staged <file>..." to unstage)
+                                modified:   story1.txt
+
+                        Changes not staged for commit:
+                          (use "git add <file>..." to update what will be committed)
+                          (use "git restore <file>..." to discard changes in working directory)
+                                modified:   story2.txt
+
+                        PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT> git restore --staged story1.txt
+                        PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT> git status
+                        On branch main
+                        Your branch is ahead of 'origin/main' by 3 commits.
+                          (use "git push" to publish your local commits)
+
+                        Changes not staged for commit:
+                          (use "git add <file>..." to update what will be committed)
+                          (use "git restore <file>..." to discard changes in working directory)
+                                modified:   story1.txt
+                                modified:   story2.txt
+
+                        no changes added to commit (use "git add" and/or "git commit -a")
+                        PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT>
+                  
+In this above example we want to stage story2.txt first hence we restored the story1.txt file to staging area from commited area. 
+                        PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT> git add story2.txt
+                        PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT> git commit -m "Updated second story"
+                        [main 41e6102] Updated second story
+                         1 file changed, 0 insertions(+), 0 deletions(-)
+                        PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT> git status
+                        On branch main
+                        Your branch is ahead of 'origin/main' by 4 commits.
+                          (use "git push" to publish your local commits)
+
+                        Changes not staged for commit:
+                          (use "git add <file>..." to update what will be committed)
+                          (use "git restore <file>..." to discard changes in working directory)
+                                modified:   story1.txt
+
+                        no changes added to commit (use "git add" and/or "git commit -a")
+                        PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT>            
+ Let's say another use case we have created a file called notes.txt 
  
+                       
+                        PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT> echo "my story ideas" > notes.txt
+                        PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT> git status
+                        On branch main
+                        Your branch is ahead of 'origin/main' by 4 commits.
+                          (use "git push" to publish your local commits)
 
+                        Changes not staged for commit:
+                          (use "git add <file>..." to update what will be committed)
+                          (use "git restore <file>..." to discard changes in working directory)
+                                modified:   story1.txt
 
+                        Untracked files:
+                          (use "git add <file>..." to include in what will be committed)
+                                notes.txt
 
- 
+                        no changes added to commit (use "git add" and/or "git commit -a")
+                        PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT> git add .
+                        PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT> git status
+                        On branch main
+                        Your branch is ahead of 'origin/main' by 4 commits.
+                          (use "git push" to publish your local commits)
+
+                        Changes to be committed:
+                          (use "git restore --staged <file>..." to unstage)
+                                new file:   notes.txt
+                                modified:   story1.txt
+
+                        PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT>
+                        PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT> echo "notes.txt" >.gitignore
+
+                        PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT> cat .gitignore
+                        notes.txt
+                        PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT> git status
+                        On branch main
+                        Your branch is ahead of 'origin/main' by 4 commits.
+                          (use "git push" to publish your local commits)
+
+                        Changes to be committed:
+                          (use "git restore --staged <file>..." to unstage)
+                                modified:   story1.txt
+
+                        Untracked files:
+                          (use "git add <file>..." to include in what will be committed)
+                                .gitignore
+                                notes.txt
+
+                        PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT>                           
+
