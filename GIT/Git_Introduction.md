@@ -311,5 +311,57 @@ In this above example we want to stage story2.txt first hence we restored the st
                                 .gitignore
                                 notes.txt
 
-                        PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT>                           
+                        PS C:\Users\cbmivsi\Desktop\SINGAM\MY GIT\GIT>       
+                        
+ # Questions
+ 
+ What is the command to initialize a git repository? -- git init
+ Which hidden folder gets created after initializing a git repository?  .git
+ Once a git repository has been initialized, which stage contains the active changes in your local git repository? -- Woking Area
+ Which stage contains new changes that will soon be committed to local git repo ?  -- Staging Area
+ 
+ # Git Log 
+ Git log consists of commit hash code, author name and date of commit. 
+ 
+                     sarah $ cd /home/sarah/story-blog
+                     sarah $ git log
+                     fatal: your current branch 'master' does not have any commits yet
+                     sarah $ git status
+                     On branch master
+
+                     No commits yet
+
+                     Untracked files:
+                       (use "git add <file>..." to include in what will be committed)
+                             lion-and-mouse.txt
+
+                     nothing added to commit but untracked files present (use "git add" to track)
+                     sarah $ git add lion-and-mouse.txt 
+                     sarah $ git commit -m "Added the lion and mouse story"
+                     [master (root-commit) 7c63d00] Added the lion and mouse story
+                      1 file changed, 0 insertions(+), 0 deletions(-)
+                      create mode 100644 lion-and-mouse.txt
+
+                     sarah (master)$ git log
+                     commit 7c63d00376acbed06e4b355a8597431a175c048e (HEAD -> master)
+                     Author: sarah <sarah@example.com>
+                     Date:   Mon Apr 3 07:43:29 2023 +0000
+
+                         Added the lion and mouse story
+                     sarah (master)     
+                     sarah (master)$ git log --name-only    # to check the file name we use git log --name-only
+                     commit 7c63d00376acbed06e4b355a8597431a175c048e (HEAD -> master)
+                     Author: sarah <sarah@example.com>
+                     Date:   Mon Apr 3 07:43:29 2023 +0000
+
+                         Added the lion and mouse story
+
+                     lion-and-mouse.txt
+                     sarah (master)$ 
+                     
+                     sarah (master)$ git log --oneline   # to display the logs in compact way (one log per line)?
+                     7fb2002 (HEAD -> master) Added a new story
+                     7c63d00 Added the lion and mouse story
+                     sarah (master)$
+Identify who made the latest commit in the new repository. --  git log -n 1
 
