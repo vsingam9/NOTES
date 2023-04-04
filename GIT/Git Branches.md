@@ -97,3 +97,14 @@ git branch -d my-branch-name
 git branch -D my-branch-name
 
 NOTE: The -d option only deletes the branch if it has already been merged. The -D option is a shortcut for --delete --force, which deletes the branch irrespective of its merged status.
+
+
+# commands: 
+Create a new branch : git branch sarah(branch name)
+Switch to an existing branch: git checkout sarah
+Create a new branch and switch to new branch: git checkout -b max
+To delete a branch : git branch -d max
+To list all branches: git branch 
+
+What is a branch in git? Pointer to a specific commit
+What is the default branch of a git repository?  master
