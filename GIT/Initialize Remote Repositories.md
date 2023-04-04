@@ -20,3 +20,9 @@ In order to sync our local repo to remote repo , we will push the code from loca
 
 git push origin master
 
+# Cloning remote repositories
+
+git clone http://git.example.com/sarah/story-blog.git
+
+# Pull Requests
+
